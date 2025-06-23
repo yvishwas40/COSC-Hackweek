@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🎤 Live Voice Typing with Deepgram</title>
+</head>
+<body>
+  <h2>🧙‍♂️ Speak and Watch the Magic</h2>
+  <button id="recordBtn">Start Listening</button>
+  <br><br>
+  <textarea id="transcript" rows="10" cols="50" placeholder="Your words appear here..."></textarea>
+
+  <script>
+    let socket;
+    let mediaRecorder;
+    let stream;
+    let isRecording = false;
+
+    const btn = document.getElementById('recordBtn');
+    const textarea = document.getElementById('transcript');
+    const DEEPGRAM_API_KEY = '9cd05f0560da0a9e60b8c5397b2ddda7620f7c64';  // 🔑 Replace with your key
+
+    btn.onclick = async () => {
+      if (!isRecording) {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+        socket = new WebSocket('wss://api.deepgram.com/v1/listen?punctuate=true', ['token', DEEPGRAM_API_KEY]);
+
+        socket.onopen = () => {
+          mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0 && socket.readyState === 1) {
+              socket.send(e.data);
+            }
+          };
+          mediaRecorder.start(250); // send every 250ms
+        };
+
+        socket.onmessage = msg => {
+          const data = JSON.parse(msg.data);
+          const transcript = data.channel?.alternatives[0]?.transcript;
+          if (transcript) {
+            textarea.value = transcript;
+          }
+        };
+
+        isRecording = true;
+        btn.textContent = "Stop Listening";
+      } else {
+        mediaRecorder.stop();
+        stream.getTracks().forEach(track => track.stop());
+        socket.close();
+        isRecording = false;
+        btn.textContent = "Start Listening";
+      }
+    };
+  </script>
+</body>
+</html>
