@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMW Logo in Pure CSS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f0f0;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 24px;
+    }
+
+    #bmw {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 50px auto;
+    }
+
+    .circle {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+    }
+
+    .circle.c1 {
+      padding: 7px;
+      background: linear-gradient(135deg, rgba(199, 219, 230, 1) 0%, rgba(74, 79, 81, 1) 67%);
+    }
+
+    .circle.c2 {
+      background: linear-gradient(135deg, rgba(162, 162, 162, 1) 0%, rgba(170, 170, 170, 1) 8%, rgba(4, 7, 7, 1) 67%);
+      position: relative;
+    }
+
+    .circle.c3 {
+      background: #555;
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .c2 > span {
+      position: absolute;
+      text-shadow: 1px 2px 3px #333;
+      color: #fff;
+      font-size: 55px;
+      font-weight: bold;
+      font-family: 'Noto Sans', sans-serif;
+    }
+
+    .c2 .b {
+      top: 44px;
+      left: 15%;
+      transform: rotate(310deg);
+    }
+
+    .c2 .m {
+      top: 5px;
+      left: 42%;
+    }
+
+    .c2 .w {
+      top: 48px;
+      right: 14%;
+      font-size: 50px;
+      transform: rotate(50deg);
+    }
+
+    .shape {
+      width: 47%;
+      height: 47%;
+      border: 3px solid #ddd;
+      position: absolute;
+      top: 2%;
+      background: linear-gradient(135deg, rgba(248, 249, 249, 1) 0%, rgba(198, 198, 198, 1) 36%);
+    }
+
+    .shape.s1 {
+      left: 2%;
+      border-radius: 100% 0 0 0;
+      background: linear-gradient(135deg, rgba(134, 195, 226, 1) 0%, rgba(47, 154, 205, 1) 36%);
+    }
+
+    .shape.s2 {
+      right: 2%;
+      border-radius: 0 100% 0 0;
+    }
+
+    .shape.s3 {
+      right: 2%;
+      top: 51%;
+      border-radius: 0 0 100% 0;
+      background: linear-gradient(135deg, rgba(134, 195, 226, 1) 0%, rgba(47, 154, 205, 1) 36%);
+    }
+
+    .shape.s4 {
+      left: 2%;
+      top: 51%;
+      border-radius: 0 0 0 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>BMW Logo in Pure CSS</h1>
+
+  <div id="bmw">
+    <div class="circle c1">
+      <div class="circle c2">
+        <span class="b">B</span>
+        <span class="m">M</span>
+        <span class="w">W</span>
+        <div class="circle c3">
+          <div class="shape s1"></div>
+          <div class="shape s2"></div>
+          <div class="shape s3"></div>
+          <div class="shape s4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
